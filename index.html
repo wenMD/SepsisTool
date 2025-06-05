@@ -65,7 +65,22 @@
           <option value="1">GCS ≤10</option>
           <option value="2">Fixed pupils bilaterally</option>
         </select>
-        <button type="button" onclick="calculatePhoenixRisk()">Calculate Phoenix Score</button>
+        
+<h3>Blood Pressure Assessment (Septic Shock Risk)</h3>
+<label for="bp-age">Select Age Group:</label>
+<select id="bp-age">
+  <option value="0-1">0–1 mo</option>
+  <option value="1-11">1–11 mo</option>
+  <option value="12-23">1–2 yr</option>
+  <option value="24-59">2–5 yr</option>
+  <option value="60-143">6–12 yr</option>
+  <option value="144-216">13–17 yr</option>
+</select>
+<label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
+<input type="number" id="bp-value" />
+<div id="bp-result" class="result"></div>
+
+<button type="button" onclick="calculatePhoenixRisk()">Calculate Phoenix Score</button>
         <div id="phoenix-result" class="result"></div>
       </form>
     </div>
@@ -108,6 +123,25 @@
   </div>
   <script>
     function calculatePhoenixRisk() {
+
+      const ageGroup = document.getElementById('bp-age').value;
+      const sbp = parseInt(document.getElementById('bp-value').value);
+      let threshold = 0;
+      switch (ageGroup) {
+        case "0-1": threshold = 65; break;
+        case "1-11": threshold = 75; break;
+        case "12-23": threshold = 85; break;
+        case "24-59": threshold = 90; break;
+        case "60-143": threshold = 95; break;
+        case "144-216": threshold = 100; break;
+      }
+      if (!isNaN(sbp)) {
+        const msg = sbp < threshold
+          ? "🛑 Hypotension detected — concern for septic shock or cardiovascular dysfunction"
+          : "✅ Blood pressure is within normal limits for age";
+        document.getElementById("bp-result").innerText = msg;
+      }
+
       const score = ['phoenix-resp', 'phoenix-vaso', 'phoenix-lactate', 'phoenix-map', 'phoenix-coag', 'phoenix-neuro']
         .reduce((sum, id) => sum + parseInt(document.getElementById(id).value), 0);
       let result = '';
