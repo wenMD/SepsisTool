@@ -132,8 +132,8 @@
         .reduce((sum, id) => sum + parseInt(document.getElementById(id).value), 0);
       let result = '';
       if (score <= 4) result = 'Low Risk';
-      else if (score <= 7) result = 'Moderate Risk';
-      else result = 'High Risk';
+      else if (score <= 7) result = '🛑 Moderate Risk';
+      else result = '🛑 High Risk';
       document.getElementById('phoenix-result').innerText = `Phoenix Score: ${score} → ${result}`;
     }
     function calculateSIRSRisk() {
