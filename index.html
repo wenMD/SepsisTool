@@ -1,49 +1,50 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="z9AuvwH7B6NmCymidXkZUY8FqdrpZsdtmigDVG6oDJ8" />
-  <title>Pediatric Sepsis Risk Tool</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="z9AuvwH7B6NmCymidXkZUY8FqdrpZsdtmigDVG6oDJ8" name="google-site-verification"/>
+<title>Pediatric Sepsis Risk Tool</title>
+<link href="style.css" rel="stylesheet"/>
+<link href="manifest.json" rel="manifest"/>
 </head>
 <body>
-  <h1>Pediatric Sepsis Risk Tool</h1>
-  <div class="container">
-    <div class="card">
-      <h2>Phoenix Criteria</h2>
-      <form id="phoenix-form">
-        <h3>Respiratory (0–3 points)</h3>
-        <label for="phoenix-resp">Select respiratory status:</label>
-        <select id="phoenix-resp">
-          <option value="0">PaO₂:FiO₂ ≥400 or SpO₂:FiO₂ ≥292</option>
-          <option value="1">PaO₂:FiO₂ <400 and any support OR SpO₂:FiO₂ <292 with support</option>
-          <option value="2">PaO₂:FiO₂ 100–200 and IMV OR SpO₂:FiO₂ 148–220 and IMV</option>
-          <option value="3">PaO₂:FiO₂ <100 and IMV OR SpO₂:FiO₂ <148 and IMV</option>
-        </select>
-        <h3>Cardiovascular (0–6 points)</h3>
-        <label for="phoenix-vaso">Select vasoactive support:</label>
-        <select id="phoenix-vaso">
-          <option value="0">No vasoactive medications</option>
-          <option value="1">1 vasoactive medication</option>
-          <option value="2">≥2 vasoactive medications</option>
-        </select>
-        <label for="phoenix-lactate">Select lactate level:</label>
-        <select id="phoenix-lactate">
-          <option value="0">Lactate <5 mmol/L</option>
-          <option value="1">Lactate 5–10.9 mmol/L</option>
-          <option value="2">Lactate ≥11 mmol/L</option>
-        </select>
-        <label for="phoenix-map">Select Mean Arterial Pressure by age:</label>
-        <select id="phoenix-map">
-          <option value="0">MAP above normal threshold</option>
-          <option value="1">MAP mildly below threshold</option>
-          <option value="2">MAP significantly below threshold</option>
-        </select>
-        <details><summary>Show MAP Scoring Table</summary><table>
-          <thead><tr><th>Age</th><th>0 pts</th><th>1 pt</th><th>2 pts</th></tr></thead>
-          <tbody>
+<h1>Pediatric Sepsis Risk Tool</h1>
+<div class="container">
+<div class="card">
+<h2>Phoenix Criteria</h2>
+<form id="phoenix-form">
+<h3>Respiratory (0–3 points)</h3>
+<label for="phoenix-resp">Select respiratory status:</label>
+<select id="phoenix-resp">
+<option value="0">PaO₂:FiO₂ ≥400 or SpO₂:FiO₂ ≥292</option>
+<option value="1">PaO₂:FiO₂ &lt;400 and any support OR SpO₂:FiO₂ &lt;292 with support</option>
+<option value="2">PaO₂:FiO₂ 100–200 and IMV OR SpO₂:FiO₂ 148–220 and IMV</option>
+<option value="3">PaO₂:FiO₂ &lt;100 and IMV OR SpO₂:FiO₂ &lt;148 and IMV</option>
+</select>
+<h3>Cardiovascular (0–6 points)</h3>
+<label for="phoenix-vaso">Select vasoactive support:</label>
+<select id="phoenix-vaso">
+<option value="0">No vasoactive medications</option>
+<option value="1">1 vasoactive medication</option>
+<option value="2">≥2 vasoactive medications</option>
+</select>
+<label for="phoenix-lactate">Select lactate level:</label>
+<select id="phoenix-lactate">
+<option value="0">Lactate &lt;5 mmol/L</option>
+<option value="1">Lactate 5–10.9 mmol/L</option>
+<option value="2">Lactate ≥11 mmol/L</option>
+</select>
+<label for="phoenix-map">Select Mean Arterial Pressure by age:</label>
+<select id="phoenix-map">
+<option value="0">MAP above normal threshold</option>
+<option value="1">MAP mildly below threshold</option>
+<option value="2">MAP significantly below threshold</option>
+</select>
+<details><summary>Show MAP Scoring Table</summary><table>
+<thead><tr><th>Age</th><th>0 pts</th><th>1 pt</th><th>2 pts</th></tr></thead>
+<tbody>
 <tr><td>&lt;1 mo</td><td>&gt;30</td><td>17–30</td><td>&lt;17</td></tr>
 <tr><td>1–11 mo</td><td>&gt;38</td><td>25–38</td><td>&lt;25</td></tr>
 <tr><td>1–&lt;2 yr</td><td>&gt;43</td><td>31–43</td><td>&lt;31</td></tr>
@@ -51,80 +52,87 @@
 <tr><td>5–&lt;12 yr</td><td>&gt;48</td><td>36–48</td><td>&lt;36</td></tr>
 <tr><td>12–17 yr</td><td>&gt;51</td><td>38–51</td><td>&lt;38</td></tr>
 </tbody></table>
-        </details>
-        <h3>Coagulation (0–2 points)</h3>
-        <label for="phoenix-coag">Select highest scoring abnormality (or none):</label>
-        <select id="phoenix-coag">
-          <option value="0">All normal: Platelets ≥100k, INR ≤1.3, D-dimer ≤2, Fibrinogen ≥100</option>
-          <option value="1">1 abnormal value: Platelets <100k, INR >1.3, D-dimer >2, or Fibrinogen <100</option>
-          <option value="2">2 or more abnormal values</option>
-        </select>
-        <h3>Neurologic (0–2 points)</h3>
-        <label for="phoenix-neuro">Select neurological status:</label>
-        <select id="phoenix-neuro">
-          <option value="0">GCS >10; pupils reactive</option>
-          <option value="1">GCS ≤10</option>
-          <option value="2">Fixed pupils bilaterally</option>
-        </select>
-        
+</details>
+<h3>Coagulation (0–2 points)</h3>
+<label for="phoenix-coag">Select highest scoring abnormality (or none):</label>
+<select id="phoenix-coag">
+<option value="0">All normal: Platelets ≥100k, INR ≤1.3, D-dimer ≤2, Fibrinogen ≥100</option>
+<option value="1">1 abnormal value: Platelets &lt;100k, INR &gt;1.3, D-dimer &gt;2, or Fibrinogen &lt;100</option>
+<option value="2">2 or more abnormal values</option>
+</select>
+<h3>Neurologic (0–2 points)</h3>
+<label for="phoenix-neuro">Select neurological status:</label>
+<select id="phoenix-neuro">
+<option value="0">GCS &gt;10; pupils reactive</option>
+<option value="1">GCS ≤10</option>
+<option value="2">Fixed pupils bilaterally</option>
+</select>
+<button onclick="calculatePhoenixRisk()" type="button">Calculate Phoenix Score</button>
+<div class="result" id="phoenix-result"></div>
+</form>
+</div>
+<div class="card">
+<h2>SIRS Criteria</h2>
+<form id="sirs-form">
+<label for="sirs-temp">Temperature &lt;36°C or &gt;38.5°C:</label>
+<select id="sirs-temp">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-hr">Abnormal heart rate for age:</label>
+<select id="sirs-hr">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-rr">Abnormal respiratory rate for age:</label>
+<select id="sirs-rr">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-wbc">Abnormal WBC count for age:</label>
+<select id="sirs-wbc">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
 
-<button type="button" onclick="calculatePhoenixRisk()">Calculate Phoenix Score</button>
-        <div id="phoenix-result" class="result"></div>
-      </form>
-    </div>
-    <div class="card">
-      <h2>SIRS Criteria</h2>
-      <form id="sirs-form">
-        <label for="sirs-temp">Temperature &lt;36°C or &gt;38.5°C:</label>
-        <select id="sirs-temp">
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-        <label for="sirs-hr">Abnormal heart rate for age:</label>
-        <select id="sirs-hr">
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-        <label for="sirs-rr">Abnormal respiratory rate for age:</label>
-        <select id="sirs-rr">
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-        <label for="sirs-wbc">Abnormal WBC count for age:</label>
-        <select id="sirs-wbc">
-          <option value="0">No</option>
-          <option value="1">Yes</option>
-        </select>
-        <details><summary>Show SIRS Criteria Table</summary><table>
-          <thead><tr><th>Age</th><th>HR</th><th>RR</th><th>WBC</th></tr></thead>
-          <tbody>
-            <tr><td><1 yr</td><td>>180 or <90</td><td>>34</td><td>>34 or <5</td></tr>
-            <tr><td>1–5 yr</td><td>>140 or <70</td><td>>22</td><td>>15.5 or <6</td></tr>
-            <tr><td>6–12 yr</td><td>>130 or <60</td><td>>18</td><td>>13 or <4.5</td></tr>
-            <tr><td>>12 yr</td><td>>110 or <55</td><td>>14</td><td>>11 or <4</td></tr>
-          </tbody></table>
-        </details>
-        
+<details><summary>Show SIRS Criteria Table</summary>
+<table>
+<thead>
+<tr>
+<th>Age</th>
+<th>HR (bpm)</th>
+<th>RR (breaths/min)</th>
+<th>WBC (×10³/µL)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>&lt;1 year</td><td>&gt;180 or &lt;90</td><td>&gt;34</td><td>&gt;34 or &lt;5</td></tr>
+<tr><td>1–5 years</td><td>&gt;140 or &lt;70</td><td>&gt;22</td><td>&gt;15.5 or &lt;6</td></tr>
+<tr><td>6–12 years</td><td>&gt;130 or &lt;60</td><td>&gt;18</td><td>&gt;13 or &lt;4.5</td></tr>
+<tr><td>&gt;12 years</td><td>&gt;110 or &lt;55</td><td>&gt;14</td><td>&gt;11 or &lt;4</td></tr>
+</tbody>
+</table>
+</details>
+
 <h3>Blood Pressure Assessment (Septic Shock Risk)</h3>
 <label for="bp-age">Select Age Group:</label>
 <select id="bp-age">
-  <option value="0-1">0–1 mo</option>
-  <option value="1-11">1–11 mo</option>
-  <option value="12-23">1–2 yr</option>
-  <option value="24-59">2–5 yr</option>
-  <option value="60-143">6–12 yr</option>
-  <option value="144-216">13–17 yr</option>
+<option value="0-1">0–1 mo</option>
+<option value="1-11">1–11 mo</option>
+<option value="12-23">1–2 yr</option>
+<option value="24-59">2–5 yr</option>
+<option value="60-143">6–12 yr</option>
+<option value="144-216">13–17 yr</option>
 </select>
 <label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
-<input type="number" id="bp-value" />
-<div id="bp-result" class="result"></div>
-
-<button type="button" onclick="calculateSIRSRisk()">Calculate SIRS Score</button>
-        <div id="sirs-result" class="result"></div>
-      </form>
-    </div>
-  </div>
-  <script>
+<input id="bp-value" type="number"/>
+<div class="result" id="bp-result"></div>
+<button onclick="calculateSIRSRisk()" type="button">Calculate SIRS Score</button>
+<div class="result" id="sirs-result"></div>
+</form>
+</div>
+</div>
+<script>
     function calculatePhoenixRisk() {
 
 
@@ -166,13 +174,12 @@
       document.getElementById('sirs-result').innerText = `SIRS Score: ${total} → ${result}`;
     }
   </script>
-
-  <div class="references">
-    <h3>References</h3>
-    <ul>
-      <li><a href="https://jamanetwork.com/journals/jama/fullarticle/2814296" target="_blank">Sanchez-Pinto LN et al. Development and Validation of the Phoenix Criteria for Pediatric Sepsis and Septic Shock. JAMA. 2024.</a></li>
-      <li><a href="https://pubmed.ncbi.nlm.nih.gov/15636651/" target="_blank">Goldstein B et al. International pediatric sepsis consensus conference: definitions for sepsis and organ dysfunction in pediatrics. Pediatr Crit Care Med. 2005.</a></li>
-    </ul>
-  </div>
+<div class="references">
+<h3>References</h3>
+<ul>
+<li><a href="https://jamanetwork.com/journals/jama/fullarticle/2814296" target="_blank">Sanchez-Pinto LN et al. Development and Validation of the Phoenix Criteria for Pediatric Sepsis and Septic Shock. JAMA. 2024.</a></li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/15636651/" target="_blank">Goldstein B et al. International pediatric sepsis consensus conference: definitions for sepsis and organ dysfunction in pediatrics. Pediatr Crit Care Med. 2005.</a></li>
+</ul>
+</div>
 </body>
 </html>
