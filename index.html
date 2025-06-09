@@ -131,6 +131,25 @@
 <label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
 <input id="bp-value" type="number"/>
 <div class="result" id="bp-result"></div>
+
+<h4>SBP Threshold – Goldstein Criteria</h4>
+<table style="text-align: center; width: 100%;">
+  <thead>
+    <tr>
+      <th>Age</th>
+      <th>SBP (mmHg)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0–1 mo</td><td>&lt;65</td></tr>
+    <tr><td>1–11 mo</td><td>&lt;75</td></tr>
+    <tr><td>1–2 yr</td><td>&lt;85</td></tr>
+    <tr><td>2–5 yr</td><td>&lt;90</td></tr>
+    <tr><td>6–12 yr</td><td>&lt;95</td></tr>
+    <tr><td>13–17 yr</td><td>&lt;100</td></tr>
+  </tbody>
+</table>
+
 <button onclick="calculateSIRSRisk()" type="button">Calculate SIRS Score</button>
 <div class="result" id="sirs-result"></div>
 </form>
