@@ -6,8 +6,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="z9AuvwH7B6NmCymidXkZUY8FqdrpZsdtmigDVG6oDJ8" name="google-site-verification"/>
 <title>Pediatric Sepsis Risk Tool</title>
-<meta content="Free online pediatric sepsis identification tool using Phoenix and SIRS criteria. Built for clinicians to quickly assess sepsis risk in children." name="description"/>
-<meta content="pediatric sepsis, sepsis identification tool, phoenix criteria, SIRS score, Goldstein criteria, sepsis calculator, PICU, emergency medicine, peds, pediatrics, sepsis, pals, sepsis risk" name="keywords"/>
+<meta name="description" content="Free online pediatric sepsis identification tool using Phoenix and SIRS criteria. Built for clinicians to quickly assess sepsis risk in children.">
+<meta name="keywords" content="pediatric sepsis, sepsis identification tool, phoenix criteria, SIRS score, Goldstein criteria, sepsis calculator, PICU, emergency medicine, peds, pediatrics, sepsis, pals, sepsis risk">    
 <link href="style.css" rel="stylesheet"/>
 <link href="manifest.json" rel="manifest"/>
 </head>
@@ -38,21 +38,12 @@
 <option value="1">Lactate 5–10.9 mmol/L</option>
 <option value="2">Lactate ≥11 mmol/L</option>
 </select>
-
-
-
-<h4>Mean Arterial Pressure Input</h4>
-<label for="phoenix-map-age">Select Age Group:</label>
-<select id="phoenix-map-age">
-<option value="0">&lt;1 mo</option>
-<option value="1">1–11 mo</option>
-<option value="2">1–&lt;2 yr</option>
-<option value="3">2–&lt;5 yr</option>
-<option value="4">5–&lt;12 yr</option>
-<option value="5">12–17 yr</option>
+<label for="phoenix-map">Select Mean Arterial Pressure by age:</label>
+<select id="phoenix-map">
+<option value="0">MAP above normal threshold</option>
+<option value="1">MAP mildly below threshold</option>
+<option value="2">MAP significantly below threshold</option>
 </select>
-<label for="phoenix-map-value">Enter Mean Arterial Pressure (mmHg):</label>
-<input id="phoenix-map-value" type="number"/>
 <h4>MAP Scoring Table</h4><table>
 <table style="text-align: center; width: 100%;">
 <thead><tr><th>Age</th><th>0 pts</th><th>1 pt</th><th>2 pts</th></tr></thead>
@@ -64,7 +55,7 @@
 <tr><td>5–&lt;12 yr</td><td>&gt;48</td><td>36–48</td><td>&lt;36</td></tr>
 <tr><td>12–17 yr</td><td>&gt;51</td><td>38–51</td><td>&lt;38</td></tr>
 </tbody></table>
-
+</details>
 <h3>Coagulation (0–2 points)</h3>
 <label for="phoenix-coag">Select highest scoring abnormality (or none):</label>
 <select id="phoenix-coag">
@@ -81,7 +72,7 @@
 </select>
 <button onclick="calculatePhoenixRisk()" type="button">Calculate Phoenix Score</button>
 <div class="result" id="phoenix-result"></div>
-</table></form>
+</form>
 </div>
 <div class="card">
 <h2>SIRS Criteria</h2>
@@ -123,7 +114,7 @@
 <tr><td>&gt;12 years</td><td>&gt;110 or &lt;55</td><td>&gt;14</td><td>&gt;11 or &lt;4</td></tr>
 </tbody>
 </table>
-
+</details>
 <h3>Blood Pressure Assessment (Septic Shock Risk)</h3>
 <label for="bp-age">Select Age Group:</label>
 <select id="bp-age">
@@ -145,24 +136,9 @@
 <script>
     function calculatePhoenixRisk() {
 
-      const mapAge = parseInt(document.getElementById('phoenix-map-age').value);
-      const mapValue = parseFloat(document.getElementById('phoenix-map-value').value);
-      let mapScore = 0;
-      if (!isNaN(mapValue)) {
-        switch (mapAge) {
-          case 0: if (mapValue < 17) mapScore = 2; else if (mapValue < 30) mapScore = 1; break;
-          case 1: if (mapValue < 25) mapScore = 2; else if (mapValue < 38) mapScore = 1; break;
-          case 2: if (mapValue < 31) mapScore = 2; else if (mapValue < 43) mapScore = 1; break;
-          case 3: if (mapValue < 32) mapScore = 2; else if (mapValue < 44) mapScore = 1; break;
-          case 4: if (mapValue < 36) mapScore = 2; else if (mapValue < 48) mapScore = 1; break;
-          case 5: if (mapValue < 38) mapScore = 2; else if (mapValue < 51) mapScore = 1; break;
-        }
-      }
 
-
-
-      const scoreInputs = ['phoenix-resp', 'phoenix-vaso', 'phoenix-lactate', 'phoenix-coag', 'phoenix-neuro']
-        .reduce((sum, id) => sum + parseInt(document.getElementById(id).value), 0) + mapScore;
+      const score = ['phoenix-resp', 'phoenix-vaso', 'phoenix-lactate', 'phoenix-map', 'phoenix-coag', 'phoenix-neuro']
+        .reduce((sum, id) => sum + parseInt(document.getElementById(id).value), 0);
       let result = '';
       if (score <= 4) result = 'Low Risk';
       else if (score <= 7) result = '🛑 Moderate Risk';
