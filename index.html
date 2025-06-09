@@ -52,7 +52,7 @@
 <div class="tab-buttons">
 <button class="tablink" id="defaultOpen" onclick="openTab(event, 'PhoenixTab')">Phoenix Criteria</button>
 <button class="tablink" onclick="openTab(event, 'SIRSTab')">SIRS Criteria</button>
-</div>
+<button class="tablink" onclick="openTab(event, 'LPCHTab')">LPCH Criteria</button></div>
 <div class="card tabcontent" id="PhoenixTab">
 <h2>Phoenix Criteria</h2>
 <form id="phoenix-form">
@@ -191,7 +191,143 @@
 <div class="result" id="sirs-result"></div>
 </form>
 </div>
-</div>
+<div class="card tabcontent" id="LPCHTab"><h2>LPCH Criteria</h2><div class="card">
+<h2>Phoenix Criteria</h2>
+<form id="lpch-phoenix-form">
+<h3>Respiratory (0–3 points)</h3>
+<label for="phoenix-resp">Select respiratory status:</label>
+<select id="lpch-phoenix-resp">
+<option value="0">PaO₂:FiO₂ ≥400 or SpO₂:FiO₂ ≥292</option>
+<option value="1">PaO₂:FiO₂ &lt;400 and any support OR SpO₂:FiO₂ &lt;292 with support</option>
+<option value="2">PaO₂:FiO₂ 100–200 and IMV OR SpO₂:FiO₂ 148–220 and IMV</option>
+<option value="3">PaO₂:FiO₂ &lt;100 and IMV OR SpO₂:FiO₂ &lt;148 and IMV</option>
+</select>
+<h3>Cardiovascular (0–6 points)</h3>
+<label for="phoenix-vaso">Select vasoactive support:</label>
+<select id="lpch-phoenix-vaso">
+<option value="0">No vasoactive medications</option>
+<option value="1">1 vasoactive medication</option>
+<option value="2">≥2 vasoactive medications</option>
+</select>
+<label for="phoenix-lactate">Select lactate level:</label>
+<select id="lpch-phoenix-lactate">
+<option value="0">Lactate &lt;5 mmol/L</option>
+<option value="1">Lactate 5–10.9 mmol/L</option>
+<option value="2">Lactate ≥11 mmol/L</option>
+</select>
+<label for="phoenix-map-age">Select Age Group:</label>
+<select id="lpch-phoenix-map-age">
+<option value="0">&lt;1 mo</option>
+<option value="1">1–11 mo</option>
+<option value="2">1–&lt;2 yr</option>
+<option value="3">2–&lt;5 yr</option>
+<option value="4">5–&lt;12 yr</option>
+<option value="5">12–17 yr</option>
+</select>
+<label for="phoenix-map-value">Enter Mean Arterial Pressure (mmHg):</label>
+<input id="lpch-phoenix-map-value" type="number"/>
+<h4>MAP Scoring Table</h4><table>
+<table style="text-align: center; width: 100%;">
+<thead><tr><th>Age</th><th>0 pts</th><th>1 pt</th><th>2 pts</th></tr></thead>
+<tbody>
+<tr><td>&lt;1 mo</td><td>&gt;30</td><td>17–30</td><td>&lt;17</td></tr>
+<tr><td>1–11 mo</td><td>&gt;38</td><td>25–38</td><td>&lt;25</td></tr>
+<tr><td>1–&lt;2 yr</td><td>&gt;43</td><td>31–43</td><td>&lt;31</td></tr>
+<tr><td>2–&lt;5 yr</td><td>&gt;44</td><td>32–44</td><td>&lt;32</td></tr>
+<tr><td>5–&lt;12 yr</td><td>&gt;48</td><td>36–48</td><td>&lt;36</td></tr>
+<tr><td>12–17 yr</td><td>&gt;51</td><td>38–51</td><td>&lt;38</td></tr>
+</tbody></table>
+<h3>Coagulation (0–2 points)</h3>
+<label for="phoenix-coag">Select highest scoring abnormality (or none):</label>
+<select id="lpch-phoenix-coag">
+<option value="0">All normal: Platelets ≥100k, INR ≤1.3, D-dimer ≤2, Fibrinogen ≥100</option>
+<option value="1">1 abnormal value: Platelets &lt;100k, INR &gt;1.3, D-dimer &gt;2, or Fibrinogen &lt;100</option>
+<option value="2">2 or more abnormal values</option>
+</select>
+<h3>Neurologic (0–2 points)</h3>
+<label for="phoenix-neuro">Select neurological status:</label>
+<select id="lpch-phoenix-neuro">
+<option value="0">GCS &gt;10; pupils reactive</option>
+<option value="1">GCS ≤10</option>
+<option value="2">Fixed pupils bilaterally</option>
+</select>
+<button onclick="calculatePhoenixRiskLPCH()" type="button">Calculate Phoenix Score</button>
+<div class="result" id="lpch-phoenix-result"></div>
+</table></form>
+</div><div class="card">
+<h2>SIRS Criteria</h2>
+<form id="lpch-sirs-form">
+<label for="sirs-temp">Temperature &lt;36°C or &gt;38.5°C:</label>
+<select id="lpch-sirs-temp">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-hr">Abnormal heart rate for age:</label>
+<select id="lpch-sirs-hr">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-rr">Abnormal respiratory rate for age:</label>
+<select id="lpch-sirs-rr">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<label for="sirs-wbc">Abnormal WBC count for age:</label>
+<select id="lpch-sirs-wbc">
+<option value="0">No</option>
+<option value="1">Yes</option>
+</select>
+<h4>SIRS Criteria Table</h4>
+<table style="text-align: center; width: 100%;">
+<thead>
+<tr>
+<th>Age</th>
+<th>HR (bpm)</th>
+<th>RR (breaths/min)</th>
+<th>WBC (×10³/µL)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>&lt;1 year</td><td>&gt;180 or &lt;90</td><td>&gt;34</td><td>&gt;34 or &lt;5</td></tr>
+<tr><td>1–5 years</td><td>&gt;140 or &lt;70</td><td>&gt;22</td><td>&gt;15.5 or &lt;6</td></tr>
+<tr><td>6–12 years</td><td>&gt;130 or &lt;60</td><td>&gt;18</td><td>&gt;13 or &lt;4.5</td></tr>
+<tr><td>&gt;12 years</td><td>&gt;110 or &lt;55</td><td>&gt;14</td><td>&gt;11 or &lt;4</td></tr>
+</tbody>
+</table>
+<h3>Blood Pressure Assessment (Septic Shock Risk)</h3>
+<label for="bp-age">Select Age Group:</label>
+<select id="lpch-bp-age">
+<option value="0-1">0–1 mo</option>
+<option value="1-11">1–11 mo</option>
+<option value="12-23">1–2 yr</option>
+<option value="24-59">2–5 yr</option>
+<option value="60-143">6–12 yr</option>
+<option value="144-216">13–17 yr</option>
+</select>
+<label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
+<input id="lpch-bp-value" type="number"/>
+<div class="result" id="lpch-bp-result"></div>
+<h4 style="margin-top: 1.5em; margin-bottom: 0.5em;">SBP Threshold – Goldstein Criteria (derived from PALS)</h4>
+<table style="text-align: center; width: 100%; margin-bottom: 1.5em;">
+<thead>
+<tr>
+<th>Age</th>
+<th>SBP (mmHg)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0–1 mo</td><td>&lt;65</td></tr>
+<tr><td>1–11 mo</td><td>&lt;75</td></tr>
+<tr><td>1–2 yr</td><td>&lt;85</td></tr>
+<tr><td>2–5 yr</td><td>&lt;90</td></tr>
+<tr><td>6–12 yr</td><td>&lt;95</td></tr>
+<tr><td>13–17 yr</td><td>&lt;100</td></tr>
+</tbody>
+</table>
+<button onclick="calculateSIRSRiskLPCH()" type="button">Calculate SIRS Score</button>
+<div class="result" id="lpch-sirs-result"></div>
+</form>
+</div></div></div>
 <script>
 function calculatePhoenixRisk() {
   const mapAge = parseInt(document.getElementById('phoenix-map-age').value);
@@ -279,5 +415,62 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("defaultOpen").click();
 });
 </script>
-</body>
+<script>
+function calculatePhoenixRiskLPCH() {
+  const mapAge = parseInt(document.getElementById('lpch-phoenix-map-age').value);
+  const mapValue = parseFloat(document.getElementById('lpch-phoenix-map-value').value);
+  let mapScore = 0;
+  if (!isNaN(mapValue)) {
+    switch (mapAge) {
+      case 0: mapScore = mapValue < 17 ? 2 : (mapValue < 30 ? 1 : 0); break;
+      case 1: mapScore = mapValue < 25 ? 2 : (mapValue < 38 ? 1 : 0); break;
+      case 2: mapScore = mapValue < 31 ? 2 : (mapValue < 43 ? 1 : 0); break;
+      case 3: mapScore = mapValue < 32 ? 2 : (mapValue < 44 ? 1 : 0); break;
+      case 4: mapScore = mapValue < 36 ? 2 : (mapValue < 48 ? 1 : 0); break;
+      case 5: mapScore = mapValue < 38 ? 2 : (mapValue < 51 ? 1 : 0); break;
+    }
+  }
+  const vaso = parseInt(document.getElementById('lpch-phoenix-vaso').value);
+  const lactate = parseInt(document.getElementById('lpch-phoenix-lactate').value);
+  const cvScore = vaso + lactate + mapScore;
+  const resp = parseInt(document.getElementById('lpch-phoenix-resp').value);
+  const coag = parseInt(document.getElementById('lpch-phoenix-coag').value);
+  const neuro = parseInt(document.getElementById('lpch-phoenix-neuro').value);
+  const score = resp + cvScore + coag + neuro;
+  let result = '';
+  if (score <= 4) result = '✅ Low Risk';
+  else if (score <= 7) result = '🛑 Moderate Risk';
+  else result = '🛑 High Risk';
+  document.getElementById('lpch-phoenix-result').innerText = `Phoenix Score: ${score} → ${result}`;
+}
+
+function calculateSIRSRiskLPCH() {
+  const ageGroup = document.getElementById('lpch-bp-age').value;
+  const sbp = parseInt(document.getElementById('lpch-bp-value').value);
+  let threshold = 0;
+  switch (ageGroup) {
+    case "0-1": threshold = 65; break;
+    case "1-11": threshold = 75; break;
+    case "12-23": threshold = 85; break;
+    case "24-59": threshold = 90; break;
+    case "60-143": threshold = 95; break;
+    case "144-216": threshold = 100; break;
+  }
+  if (!isNaN(sbp)) {
+    const msg = sbp < threshold
+      ? "🛑 Hypotension detected — concern for septic shock or cardiovascular dysfunction"
+      : "✅ Blood pressure is within normal limits for age";
+    document.getElementById("lpch-bp-result").innerText = msg;
+  }
+
+  const temp = parseInt(document.getElementById('lpch-sirs-temp').value);
+  const hr = parseInt(document.getElementById('lpch-sirs-hr').value);
+  const rr = parseInt(document.getElementById('lpch-sirs-rr').value);
+  const wbc = parseInt(document.getElementById('lpch-sirs-wbc').value);
+  const total = temp + hr + rr + wbc;
+  const meetsCriteria = (total >= 2 && (temp === 1 || wbc === 1));
+  const result = meetsCriteria ? 'Meets SIRS Sepsis Trigger' : 'Does Not Meet SIRS Trigger';
+  document.getElementById('lpch-sirs-result').innerText = `SIRS Score: ${total} → ${result}`;
+}
+</script></body>
 </html>
