@@ -10,11 +10,50 @@
 <meta content="LPCH sepsis tool, LPCH sepsis, LPCH SIRS, LPCH SIRS tool, LPCH shock, LPCH shock tool, pediatric sepsis, sepsis identification tool, phoenix criteria, SIRS score, Goldstein criteria, sepsis calculator, PICU, emergency medicine, peds, pediatrics, sepsis, pals, sepsis risk" name="keywords"/>
 <link href="style.css" rel="stylesheet"/>
 <link href="manifest.json" rel="manifest"/>
-</head>
+<style>
+.tab-buttons {
+  margin-bottom: 1em;
+}
+.tablink {
+  background-color: #e0e0e0;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 5px;
+}
+.tablink.active {
+  background-color: #b0c4de;
+}
+.tabcontent {
+  display: none;
+}
+
+/* Horizontal layout tabs */
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+.tablink {
+  flex: 1;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+}
+.tablink.active {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+</style></head>
 <body>
 <h1>Pediatric Sepsis Risk Tool</h1>
 <div class="container">
-<div class="card">
+<div class="tab-buttons">
+<button class="tablink" id="defaultOpen" onclick="openTab(event, 'PhoenixTab')">Phoenix Criteria</button>
+<button class="tablink" onclick="openTab(event, 'SIRSTab')">SIRS Criteria</button>
+</div>
+<div class="card tabcontent" id="PhoenixTab">
 <h2>Phoenix Criteria</h2>
 <form id="phoenix-form">
 <h3>Respiratory (0–3 points)</h3>
@@ -78,7 +117,7 @@
 <div class="result" id="phoenix-result"></div>
 </table></form>
 </div>
-<div class="card">
+<div class="card tabcontent" id="SIRSTab">
 <h2>SIRS Criteria</h2>
 <form id="sirs-form">
 <label for="sirs-temp">Temperature &lt;36°C or &gt;38.5°C:</label>
@@ -222,5 +261,23 @@ function calculateSIRSRisk() {
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/15636651/" target="_blank">Goldstein B et al. International pediatric sepsis consensus conference: definitions for sepsis and organ dysfunction in pediatrics. Pediatr Crit Care Med. 2005.</a></li>
 </ul>
 </div>
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("defaultOpen").click();
+});
+</script>
 </body>
 </html>
