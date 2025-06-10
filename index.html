@@ -191,7 +191,7 @@
 <div class="result" id="sirs-result"></div>
 </form>
 </div>
-<div class="card tabcontent" id="LPCHTab"><div class="card">
+<div class="card tabcontent" id="LPCHTab">
 <h2>Phoenix Criteria</h2>
 <form id="lpch-phoenix-form">
 <h3>Respiratory (0–3 points)</h3>
@@ -254,7 +254,6 @@
 <button onclick="calculatePhoenixRiskLPCH()" type="button">Calculate Phoenix Score</button>
 <div class="result" id="lpch-phoenix-result"></div>
 </table></form>
-</div><div class="card">
 <h2>SIRS Criteria</h2>
 <form id="lpch-sirs-form">
 <label for="sirs-temp">Temperature &lt;36°C or &gt;38.5°C:</label>
@@ -304,7 +303,7 @@
 <button onclick="calculateSIRSRiskLPCH()" type="button">Calculate SIRS Score</button>
 <div class="result" id="lpch-sirs-result"></div>
 </form>
-</div></div></div>
+</div></div>
 <script>
 function calculatePhoenixRisk() {
   const mapAge = parseInt(document.getElementById('phoenix-map-age').value);
