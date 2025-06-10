@@ -301,8 +301,6 @@
 <label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
 <input id="lpch-bp-value" type="number"/>
 <div class="result" id="lpch-bp-result"></div>
-
-
 <button onclick="calculateSIRSRiskLPCH()" type="button">Calculate SIRS Score</button>
 <div class="result" id="lpch-sirs-result"></div>
 </form>
@@ -418,12 +416,16 @@ function calculatePhoenixRiskLPCH() {
   const neuro = parseInt(document.getElementById('lpch-phoenix-neuro').value);
   const score = resp + cvScore + coag + neuro;
   let result = '';
-  if (score <= 4) result = '✅ Low Risk';
-  else if (score <= 7) result = '🛑 Moderate Risk';
-  else result = '🛑 High Risk';
+  if (cvScore >= 1) {
+    result = '🛑 Meets Criteria for Septic Shock - Refer to Pediatric Sepsis & Septic Shock Pathway';
+  } else if (score >= 2) {
+    result = '🛑 Meets Criteria for Sepsis - Refer to Pediatric Sepsis & Septic Shock Pathway';
+  } else {
+    result = '✅ Low Risk';
+  }
   document.getElementById('lpch-phoenix-result').innerText = `Phoenix Score: ${score} → ${result}`;
 }
-
+</script><script>
 function calculateSIRSRiskLPCH() {
   const ageGroup = document.getElementById('lpch-bp-age').value;
   const sbp = parseInt(document.getElementById('lpch-bp-value').value);
@@ -448,8 +450,9 @@ function calculateSIRSRiskLPCH() {
   const rr = parseInt(document.getElementById('lpch-sirs-rr').value);
   const sbpInput = parseInt(document.getElementById('lpch-sirs-sbp').value);
   const total = temp + hr + rr + sbpInput;
-  const meetsCriteria = (total >= 2 && (temp === 1 || sbpInput === 1));
-  const result = meetsCriteria ? 'Meets SIRS Sepsis Trigger' : 'Does Not Meet SIRS Trigger';
+  const result = total >= 2
+    ? '🛑 Meets Criteria for Sepsis - Refer to Pediatric Sepsis & Septic Shock Pathway'
+    : 'Does Not Meet SIRS Trigger';
   document.getElementById('lpch-sirs-result').innerText = `SIRS Score: ${total} → ${result}`;
 }
 </script></body>
