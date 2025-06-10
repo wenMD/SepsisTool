@@ -272,8 +272,8 @@
 <option value="0">No</option>
 <option value="1">Yes</option>
 </select>
-<label for="sirs-wbc">Abnormal WBC count for age:</label>
-<select id="lpch-sirs-wbc">
+<label for="lpch-sirs-sbp">Abnormal SBP for age:</label>
+<select id="lpch-sirs-sbp" name="lpch-sirs-sbp">
 <option value="0">No</option>
 <option value="1">Yes</option>
 </select>
@@ -284,15 +284,9 @@
 <th>Age</th>
 <th>HR (bpm)</th>
 <th>RR (breaths/min)</th>
-<th>WBC (×10³/µL)</th>
-</tr>
+<th>SBP Threshold (mmHg)</th></tr>
 </thead>
-<tbody>
-<tr><td>&lt;1 year</td><td>&gt;180 or &lt;90</td><td>&gt;34</td><td>&gt;34 or &lt;5</td></tr>
-<tr><td>1–5 years</td><td>&gt;140 or &lt;70</td><td>&gt;22</td><td>&gt;15.5 or &lt;6</td></tr>
-<tr><td>6–12 years</td><td>&gt;130 or &lt;60</td><td>&gt;18</td><td>&gt;13 or &lt;4.5</td></tr>
-<tr><td>&gt;12 years</td><td>&gt;110 or &lt;55</td><td>&gt;14</td><td>&gt;11 or &lt;4</td></tr>
-</tbody>
+<tbody><tr><td>0–1 M</td><td>&gt;205</td><td>&gt;60</td><td>&lt;60</td></tr><tr><td>≥1M – 2M</td><td>&gt;205</td><td>&gt;60</td><td>&lt;70</td></tr><tr><td>≥3M –11M</td><td>&gt;190</td><td>&gt;60</td><td>&lt;70</td></tr><tr><td>≥12M –23M</td><td>&gt;190</td><td>&gt;40</td><td>&lt;72</td></tr><tr><td>≥2Y – 3Y</td><td>&gt;140</td><td>&gt;40</td><td>&lt;74</td></tr><tr><td>≥4Y – 5Y</td><td>&gt;140</td><td>&gt;34</td><td>&lt;78</td></tr><tr><td>≥6Y – 9Y</td><td>&gt;140</td><td>&gt;30</td><td>&lt;82</td></tr><tr><td>≥10Y – 12Y</td><td>&gt;100</td><td>&gt;30</td><td>&lt;90</td></tr><tr><td>≥13Y</td><td>&gt;100</td><td>&gt;16</td><td>&lt;90</td></tr></tbody>
 </table>
 <h3>Blood Pressure Assessment (Septic Shock Risk)</h3>
 <label for="bp-age">Select Age Group:</label>
@@ -307,7 +301,7 @@
 <label for="bp-value">Enter Systolic Blood Pressure (mmHg):</label>
 <input id="lpch-bp-value" type="number"/>
 <div class="result" id="lpch-bp-result"></div>
-<h4 style="margin-top: 1.5em; margin-bottom: 0.5em;">SBP Threshold – Goldstein Criteria (derived from PALS)</h4>
+<h4 style="margin-top: 1.5em; margin-bottom: 0.5em;">SBP Threshold – LPCH Sepsis &amp; Septic Shock Pathway</h4>
 <table style="text-align: center; width: 100%; margin-bottom: 1.5em;">
 <thead>
 <tr>
@@ -315,14 +309,7 @@
 <th>SBP (mmHg)</th>
 </tr>
 </thead>
-<tbody>
-<tr><td>0–1 mo</td><td>&lt;65</td></tr>
-<tr><td>1–11 mo</td><td>&lt;75</td></tr>
-<tr><td>1–2 yr</td><td>&lt;85</td></tr>
-<tr><td>2–5 yr</td><td>&lt;90</td></tr>
-<tr><td>6–12 yr</td><td>&lt;95</td></tr>
-<tr><td>13–17 yr</td><td>&lt;100</td></tr>
-</tbody>
+<tbody><tr><td>0–1 M</td><td>&lt;60</td></tr><tr><td>≥1M – 2M</td><td>&lt;70</td></tr><tr><td>≥3M –11M</td><td>&lt;70</td></tr><tr><td>≥12M –23M</td><td>&lt;72</td></tr><tr><td>≥2Y – 3Y</td><td>&lt;74</td></tr><tr><td>≥4Y – 5Y</td><td>&lt;78</td></tr><tr><td>≥6Y – 9Y</td><td>&lt;82</td></tr><tr><td>≥10Y – 12Y</td><td>&lt;90</td></tr><tr><td>≥13Y</td><td>&lt;90</td></tr></tbody>
 </table>
 <button onclick="calculateSIRSRiskLPCH()" type="button">Calculate SIRS Score</button>
 <div class="result" id="lpch-sirs-result"></div>
@@ -395,7 +382,7 @@ function calculateSIRSRisk() {
 <ul>
 <li><a href="https://jamanetwork.com/journals/jama/fullarticle/2814296" target="_blank">Sanchez-Pinto LN et al. Development and Validation of the Phoenix Criteria for Pediatric Sepsis and Septic Shock. JAMA. 2024.</a></li>
 <li><a href="https://pubmed.ncbi.nlm.nih.gov/15636651/" target="_blank">Goldstein B et al. International pediatric sepsis consensus conference: definitions for sepsis and organ dysfunction in pediatrics. Pediatr Crit Care Med. 2005.</a></li>
-<li><a href="https://clinicalpathways.stanfordchildrens.org/Clinical%20Pathways/Sepsis%20Management.pdf" target="_blank">LPCH Pediatric Sepsis & Septic Shock Pathway.</a></li>
+<li><a href="https://clinicalpathways.stanfordchildrens.org/Clinical%20Pathways/Sepsis%20Management.pdf" target="_blank">LPCH Pediatric Sepsis &amp; Septic Shock Pathway.</a></li>
 </ul>
 </div>
 <script>
@@ -467,9 +454,9 @@ function calculateSIRSRiskLPCH() {
   const temp = parseInt(document.getElementById('lpch-sirs-temp').value);
   const hr = parseInt(document.getElementById('lpch-sirs-hr').value);
   const rr = parseInt(document.getElementById('lpch-sirs-rr').value);
-  const wbc = parseInt(document.getElementById('lpch-sirs-wbc').value);
-  const total = temp + hr + rr + wbc;
-  const meetsCriteria = (total >= 2 && (temp === 1 || wbc === 1));
+  const sbpInput = parseInt(document.getElementById('lpch-sirs-sbp').value);
+  const total = temp + hr + rr + sbpInput;
+  const meetsCriteria = (total >= 2 && (temp === 1 || sbpInput === 1));
   const result = meetsCriteria ? 'Meets SIRS Sepsis Trigger' : 'Does Not Meet SIRS Trigger';
   document.getElementById('lpch-sirs-result').innerText = `SIRS Score: ${total} → ${result}`;
 }
